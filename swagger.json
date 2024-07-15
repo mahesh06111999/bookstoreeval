@@ -1,0 +1,390 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.1.0",
+    "title": "Online Bookstore API",
+    "description": "API documentation for the Online Bookstore with enhanced features for real-time updates, data export, and more."
+  },
+  "host": "localhost:5000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Authentication endpoints"
+    },
+    {
+      "name": "Orders",
+      "description": "Order management endpoints"
+    },
+    {
+      "name": "Reviews",
+      "description": "Review management endpoints"
+    },
+    {
+      "name": "Books",
+      "description": "Book management endpoints"
+    },
+    {
+      "name": "Admin",
+      "description": "Admin management endpoints for data export and real-time updates"
+    },
+    {
+      "name": "Notifications",
+      "description": "Real-time notifications endpoints"
+    }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Register a new user",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User registered successfully"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Login an existing user",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Logged in successfully"
+          }
+        }
+      }
+    },
+    "/orders": {
+      "post": {
+        "tags": ["Orders"],
+        "summary": "Create a new order",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "formData",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "totalAmount",
+            "in": "formData",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Order created successfully"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Orders"],
+        "summary": "Get all orders",
+        "responses": {
+          "200": {
+            "description": "List of orders"
+          }
+        }
+      }
+    },
+    "/orders/{orderId}": {
+      "get": {
+        "tags": ["Orders"],
+        "summary": "Get a specific order",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order details"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Orders"],
+        "summary": "Delete a specific order",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Order deleted successfully"
+          }
+        }
+      }
+    },
+    "/reviews": {
+      "post": {
+        "tags": ["Reviews"],
+        "summary": "Create a new review",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reviewText",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "rating",
+            "in": "formData",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Review created successfully"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Reviews"],
+        "summary": "Get all reviews",
+        "responses": {
+          "200": {
+            "description": "List of reviews"
+          }
+        }
+      }
+    },
+    "/reviews/{reviewId}": {
+      "get": {
+        "tags": ["Reviews"],
+        "summary": "Get a specific review",
+        "parameters": [
+          {
+            "name": "reviewId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Review details"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Reviews"],
+        "summary": "Delete a specific review",
+        "parameters": [
+          {
+            "name": "reviewId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Review deleted successfully"
+          }
+        }
+      }
+    },
+    "/books": {
+      "post": {
+        "tags": ["Books"],
+        "summary": "Create a new book",
+        "parameters": [
+          {
+            "name": "title",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "author",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "genre",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "formData",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Book created successfully"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Books"],
+        "summary": "Get all books",
+        "responses": {
+          "200": {
+            "description": "List of books"
+          }
+        }
+      }
+    },
+    "/books/{bookId}": {
+      "get": {
+        "tags": ["Books"],
+        "summary": "Get a specific book",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Book details"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Books"],
+        "summary": "Delete a specific book",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Book deleted successfully"
+          }
+        }
+      }
+    },
+    "/admin/export-orders": {
+      "get": {
+        "tags": ["Admin"],
+        "summary": "Export all orders as a CSV file",
+        "responses": {
+          "200": {
+            "description": "CSV file with all orders"
+          }
+        }
+      }
+    },
+    "/notifications/order-placed": {
+      "post": {
+        "tags": ["Notifications"],
+        "summary": "Trigger an orderPlaced event for testing notifications",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "formData",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "customerName",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order placed event triggered"
+          }
+        }
+      }
+    },
+    "/admin/send-promotional-emails": {
+      "post": {
+        "tags": ["Admin"],
+        "summary": "Send promotional emails to users",
+        "responses": {
+          "200": {
+            "description": "Promotional emails sent"
+          }
+        }
+      }
+    },
+    "/admin/cron-jobs": {
+      "get": {
+        "tags": ["Admin"],
+        "summary": "Trigger cron jobs for tasks such as sending promotional emails",
+        "responses": {
+          "200": {
+            "description": "Cron jobs triggered"
+          }
+        }
+      }
+    },
+    "/socket.io": {
+      "get": {
+        "tags": ["Notifications"],
+        "summary": "WebSocket endpoint for real-time notifications",
+        "responses": {
+          "200": {
+            "description": "WebSocket connection established"
+          }
+        }
+      }
+    }
+  }
+}
