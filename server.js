@@ -72,7 +72,6 @@ app.use('/books', bookRoutes);
 app.use('/admin', adminRoutes);
 
 initSockets(io);
-
 initCronJobs();
 
 orderPlaced.on('orderPlaced', (order) => {
